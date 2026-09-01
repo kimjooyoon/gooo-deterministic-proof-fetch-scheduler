@@ -22,10 +22,7 @@ measure_stage() {
 
 measure_stage build go build ./...
 
-run_tests() {
-  go test -json ./... > "${evidence_dir}/go-test.json"
-}
-measure_stage test run_tests
+measure_stage test bash -c "go test -json ./... > '${evidence_dir}/go-test.json'"
 
 measure_stage vet go vet ./...
 
