@@ -1,0 +1,72 @@
+gooo deterministic_proof_fetch_scheduler v1
+
+# The .gooo source is the semantic authority. JSON only carries identity and output shape.
+authority repository_writes=0 input_repository_writes=0 local_test_executions=0 cross_project_required_gates=0 automatic_commit=0 automatic_push=0 automatic_merge=0 automatic_tag=0 automatic_release=0
+guardrail forbidden_local_validation="go test ./...|go build ./...|go vet ./...|gofmt -d|go run ./cmd/gooo-deterministic-proof-fetch-scheduler conformance" operational_refuted=true failure_deletes_forbidden=true repository_writes=0 input_repository_writes=0 local_test_executions=0 cross_project_required_gates=0 automatic_commit=0 automatic_push=0 automatic_merge=0 automatic_tag=0 automatic_release=0
+concurrency bound=8
+retry max_attempts=2 backoff_ms=2 retryable_statuses=408,429
+canonical order=lock-001,lock-002,lock-003,lock-004,lock-005,lock-006,lock-007,lock-008,lock-009,lock-010,lock-011,lock-012,lock-013,lock-014,lock-015,lock-016,lock-017,lock-018,lock-019,lock-020,lock-021,lock-022,lock-023,lock-024,lock-025,lock-026,lock-027,lock-028,lock-029,lock-030,lock-031,lock-032,lock-033,lock-034,lock-035,lock-036,lock-037,lock-038,lock-039,lock-040,lock-041,lock-042,lock-043,lock-044,lock-045,lock-046,lock-047,lock-048,lock-049,lock-050,lock-051,lock-052,lock-053
+
+lock id=lock-001 coordinate=fixture://immutable-release/lock-001 digest=sha256:0000000000000000000000000000000000000000000000000000000000000001 deps=- behavior=success latency_ms=18
+lock id=lock-002 coordinate=fixture://immutable-release/lock-002 digest=sha256:0000000000000000000000000000000000000000000000000000000000000002 deps=lock-001 behavior=success latency_ms=18
+lock id=lock-003 coordinate=fixture://immutable-release/lock-003 digest=sha256:0000000000000000000000000000000000000000000000000000000000000003 deps=lock-001 behavior=success latency_ms=18
+lock id=lock-004 coordinate=fixture://immutable-release/lock-004 digest=sha256:0000000000000000000000000000000000000000000000000000000000000004 deps=lock-001 behavior=success latency_ms=18
+lock id=lock-005 coordinate=fixture://immutable-release/lock-005 digest=sha256:0000000000000000000000000000000000000000000000000000000000000005 deps=lock-001 behavior=success latency_ms=18
+lock id=lock-006 coordinate=fixture://immutable-release/lock-006 digest=sha256:0000000000000000000000000000000000000000000000000000000000000006 deps=lock-001 behavior=success latency_ms=18
+lock id=lock-007 coordinate=fixture://immutable-release/lock-007 digest=sha256:0000000000000000000000000000000000000000000000000000000000000007 deps=lock-001 behavior=success latency_ms=18
+lock id=lock-008 coordinate=fixture://immutable-release/lock-008 digest=sha256:0000000000000000000000000000000000000000000000000000000000000008 deps=lock-001 behavior=reused latency_ms=0
+lock id=lock-009 coordinate=fixture://immutable-release/lock-009 digest=sha256:0000000000000000000000000000000000000000000000000000000000000009 deps=lock-002 behavior=success latency_ms=18
+lock id=lock-010 coordinate=fixture://immutable-release/lock-010 digest=sha256:0000000000000000000000000000000000000000000000000000000000000010 deps=lock-002 behavior=success latency_ms=18
+lock id=lock-011 coordinate=fixture://immutable-release/lock-011 digest=sha256:0000000000000000000000000000000000000000000000000000000000000011 deps=lock-002 behavior=success latency_ms=18
+lock id=lock-012 coordinate=fixture://immutable-release/lock-012 digest=sha256:0000000000000000000000000000000000000000000000000000000000000012 deps=lock-002 behavior=success latency_ms=18
+lock id=lock-013 coordinate=fixture://immutable-release/lock-013 digest=sha256:0000000000000000000000000000000000000000000000000000000000000013 deps=lock-002 behavior=success latency_ms=18
+lock id=lock-014 coordinate=fixture://immutable-release/lock-014 digest=sha256:0000000000000000000000000000000000000000000000000000000000000014 deps=lock-002 behavior=success latency_ms=18
+lock id=lock-015 coordinate=fixture://immutable-release/lock-015 digest=sha256:0000000000000000000000000000000000000000000000000000000000000015 deps=lock-002 behavior=success latency_ms=18
+lock id=lock-016 coordinate=fixture://immutable-release/lock-016 digest=sha256:0000000000000000000000000000000000000000000000000000000000000016 deps=lock-003 behavior=reused latency_ms=0
+lock id=lock-017 coordinate=fixture://immutable-release/lock-017 digest=sha256:0000000000000000000000000000000000000000000000000000000000000017 deps=lock-003 behavior=success latency_ms=18
+lock id=lock-018 coordinate=fixture://immutable-release/lock-018 digest=sha256:0000000000000000000000000000000000000000000000000000000000000018 deps=lock-003 behavior=success latency_ms=18
+lock id=lock-019 coordinate=fixture://immutable-release/lock-019 digest=sha256:0000000000000000000000000000000000000000000000000000000000000019 deps=lock-003 behavior=success latency_ms=18
+lock id=lock-020 coordinate=fixture://immutable-release/lock-020 digest=sha256:0000000000000000000000000000000000000000000000000000000000000020 deps=lock-003 behavior=success latency_ms=18
+lock id=lock-021 coordinate=fixture://immutable-release/lock-021 digest=sha256:0000000000000000000000000000000000000000000000000000000000000021 deps=lock-003 behavior=success latency_ms=18
+lock id=lock-022 coordinate=fixture://immutable-release/lock-022 digest=sha256:0000000000000000000000000000000000000000000000000000000000000022 deps=lock-003 behavior=success latency_ms=18
+lock id=lock-023 coordinate=fixture://immutable-release/lock-023 digest=sha256:0000000000000000000000000000000000000000000000000000000000000023 deps=lock-004 behavior=success latency_ms=18
+lock id=lock-024 coordinate=fixture://immutable-release/lock-024 digest=sha256:0000000000000000000000000000000000000000000000000000000000000024 deps=lock-004 behavior=reused latency_ms=0
+lock id=lock-025 coordinate=fixture://immutable-release/lock-025 digest=sha256:0000000000000000000000000000000000000000000000000000000000000025 deps=lock-004 behavior=success latency_ms=18
+lock id=lock-026 coordinate=fixture://immutable-release/lock-026 digest=sha256:0000000000000000000000000000000000000000000000000000000000000026 deps=lock-004 behavior=success latency_ms=18
+lock id=lock-027 coordinate=fixture://immutable-release/lock-027 digest=sha256:0000000000000000000000000000000000000000000000000000000000000027 deps=lock-004 behavior=success latency_ms=18
+lock id=lock-028 coordinate=fixture://immutable-release/lock-028 digest=sha256:0000000000000000000000000000000000000000000000000000000000000028 deps=lock-004 behavior=success latency_ms=18
+lock id=lock-029 coordinate=fixture://immutable-release/lock-029 digest=sha256:0000000000000000000000000000000000000000000000000000000000000029 deps=lock-004 behavior=success latency_ms=18
+lock id=lock-030 coordinate=fixture://immutable-release/lock-030 digest=sha256:0000000000000000000000000000000000000000000000000000000000000030 deps=lock-005 behavior=success latency_ms=18
+lock id=lock-031 coordinate=fixture://immutable-release/lock-031 digest=sha256:0000000000000000000000000000000000000000000000000000000000000031 deps=lock-005 behavior=success latency_ms=18
+lock id=lock-032 coordinate=fixture://immutable-release/lock-032 digest=sha256:0000000000000000000000000000000000000000000000000000000000000032 deps=lock-005 behavior=success latency_ms=18
+lock id=lock-033 coordinate=fixture://immutable-release/lock-033 digest=sha256:0000000000000000000000000000000000000000000000000000000000000033 deps=lock-005 behavior=success latency_ms=18
+lock id=lock-034 coordinate=fixture://immutable-release/lock-034 digest=sha256:0000000000000000000000000000000000000000000000000000000000000034 deps=lock-005 behavior=success latency_ms=18
+lock id=lock-035 coordinate=fixture://immutable-release/lock-035 digest=sha256:0000000000000000000000000000000000000000000000000000000000000035 deps=lock-005 behavior=success latency_ms=18
+lock id=lock-036 coordinate=fixture://immutable-release/lock-036 digest=sha256:0000000000000000000000000000000000000000000000000000000000000036 deps=lock-005 behavior=success latency_ms=18
+lock id=lock-037 coordinate=fixture://immutable-release/lock-037 digest=sha256:0000000000000000000000000000000000000000000000000000000000000037 deps=lock-006 behavior=success latency_ms=18
+lock id=lock-038 coordinate=fixture://immutable-release/lock-038 digest=sha256:0000000000000000000000000000000000000000000000000000000000000038 deps=lock-006 behavior=success latency_ms=18
+lock id=lock-039 coordinate=fixture://immutable-release/lock-039 digest=sha256:0000000000000000000000000000000000000000000000000000000000000039 deps=lock-006 behavior=success latency_ms=18
+lock id=lock-040 coordinate=fixture://immutable-release/lock-040 digest=sha256:0000000000000000000000000000000000000000000000000000000000000040 deps=lock-006 behavior=success latency_ms=18
+lock id=lock-041 coordinate=fixture://immutable-release/lock-041 digest=sha256:0000000000000000000000000000000000000000000000000000000000000041 deps=lock-006 behavior=success latency_ms=18
+lock id=lock-042 coordinate=fixture://immutable-release/lock-042 digest=sha256:0000000000000000000000000000000000000000000000000000000000000042 deps=lock-006 behavior=success latency_ms=18
+lock id=lock-043 coordinate=fixture://immutable-release/lock-043 digest=sha256:0000000000000000000000000000000000000000000000000000000000000043 deps=lock-006 behavior=success latency_ms=18
+lock id=lock-044 coordinate=fixture://immutable-release/lock-044 digest=sha256:0000000000000000000000000000000000000000000000000000000000000044 deps=lock-007 behavior=success latency_ms=18
+lock id=lock-045 coordinate=fixture://immutable-release/lock-045 digest=sha256:0000000000000000000000000000000000000000000000000000000000000045 deps=lock-007 behavior=success latency_ms=18
+lock id=lock-046 coordinate=fixture://immutable-release/lock-046 digest=sha256:0000000000000000000000000000000000000000000000000000000000000046 deps=lock-007 behavior=success latency_ms=18
+lock id=lock-047 coordinate=fixture://immutable-release/lock-047 digest=sha256:0000000000000000000000000000000000000000000000000000000000000047 deps=lock-007 behavior=success latency_ms=18
+lock id=lock-048 coordinate=fixture://immutable-release/lock-048 digest=sha256:0000000000000000000000000000000000000000000000000000000000000048 deps=lock-007 behavior=success latency_ms=18
+lock id=lock-049 coordinate=fixture://immutable-release/lock-049 digest=sha256:0000000000000000000000000000000000000000000000000000000000000049 deps=lock-007 behavior=success latency_ms=18
+lock id=lock-050 coordinate=fixture://immutable-release/lock-050 digest=sha256:0000000000000000000000000000000000000000000000000000000000000050 deps=lock-001 behavior=missing latency_ms=18
+lock id=lock-051 coordinate=fixture://immutable-release/lock-051 digest=sha256:0000000000000000000000000000000000000000000000000000000000000051 deps=lock-001 behavior=timeout latency_ms=2
+lock id=lock-052 coordinate=fixture://immutable-release/lock-052 digest=sha256:0000000000000000000000000000000000000000000000000000000000000052 deps=lock-001 behavior=rate-limit latency_ms=18
+lock id=lock-053 coordinate=fixture://immutable-release/lock-053 digest=sha256:0000000000000000000000000000000000000000000000000000000000000053 deps=lock-001 behavior=digest-mismatch latency_ms=18
+
+case ordinal=1 id=closed-canonical-order kind=success expected=CLOSED
+case ordinal=2 id=closed-reuse kind=success expected=CLOSED
+case ordinal=3 id=closed-replay kind=success expected=CLOSED
+case ordinal=4 id=unknown-missing kind=missing expected=UNKNOWN
+case ordinal=5 id=unknown-timeout kind=timeout expected=UNKNOWN
+case ordinal=6 id=unknown-rate-limit kind=rate-limit expected=UNKNOWN
+case ordinal=7 id=refuted-digest-mismatch kind=digest-mismatch expected=REFUTED
+case ordinal=8 id=refuted-coordinate-contradiction kind=coordinate-contradiction expected=REFUTED
+case ordinal=9 id=refuted-race-divergence kind=race-divergence expected=REFUTED

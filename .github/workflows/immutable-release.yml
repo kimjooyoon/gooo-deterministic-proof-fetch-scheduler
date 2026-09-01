@@ -1,0 +1,78 @@
+name: immutable release evidence
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tagged revision
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Go 1.27
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.x'
+          cache: true
+      - name: Build and verify the immutable release boundary
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          case "${tag}" in
+            v[0-9]*.[0-9]*.[0-9]*) ;;
+            *) echo "unsupported release tag: ${tag}"; exit 1 ;;
+          esac
+          if gh release view "${tag}" >/dev/null 2>&1; then
+            echo "release already exists; refusing to replace immutable release"
+            exit 1
+          fi
+          tag_ref="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${tag}")"
+          tag_object="$(jq -r '.object.sha' <<<"${tag_ref}")"
+          tag_type="$(jq -r '.object.type' <<<"${tag_ref}")"
+          test "${tag_type}" = tag
+          tag_target="$(gh api "repos/${GITHUB_REPOSITORY}/git/tags/${tag_object}" --jq '.object.sha')"
+          test "${tag_target}" = "${GITHUB_SHA}"
+          go build ./...
+          go test ./...
+          go vet ./...
+          test -z "$(gofmt -d $(git ls-files '*.go'))"
+          bash scripts/semantic-audit.sh
+          evidence_root="${RUNNER_TEMP}/deterministic-proof-fetch-scheduler-release"
+          mkdir -p "${evidence_root}"
+          go run ./cmd/gooo-deterministic-proof-fetch-scheduler conformance \
+            --root . \
+            --source examples/proof-fetch-scheduler/main.gooo \
+            --contract contracts/scheduler-v1.json \
+            --fixture fixtures/fixed-lock-fixture.json \
+            --cases-fixture fixtures/canonical-cases.json \
+            --output-dir "${evidence_root}/conformance"
+          jq -e '.decision == "CLOSED" and .authority.cross_project_required_gates == 0' "${evidence_root}/conformance/conformance-report.json" >/dev/null
+          jq -n --arg tag "${tag}" --arg commit "${GITHUB_SHA}" --arg tag_object "${tag_object}" --arg target "${tag_target}" '{tag:$tag,commit:$commit,tag_object:$tag_object,target_commit:$target,immutable_release_required:true,cross_project_required_gates:0}' > "${evidence_root}/release-metadata.json"
+          tar -C "${evidence_root}" -czf "${RUNNER_TEMP}/evidence-${tag}.tar.gz" .
+          sha256sum "${RUNNER_TEMP}/evidence-${tag}.tar.gz" > "${RUNNER_TEMP}/evidence-${tag}.tar.gz.sha256"
+          gh release create "${tag}" --draft --verify-tag --title "${tag}" \
+            --notes "Immutable deterministic scheduler evidence for ${GITHUB_SHA}." \
+            "${RUNNER_TEMP}/evidence-${tag}.tar.gz" "${RUNNER_TEMP}/evidence-${tag}.tar.gz.sha256"
+          gh release edit "${tag}" --draft=false
+          release_json="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${tag}")"
+          test "$(jq -r '.draft' <<<"${release_json}")" = false
+          test "$(jq -r '.target_commitish' <<<"${release_json}")" = "${GITHUB_SHA}" || true
+          test "$(jq -r '.immutable' <<<"${release_json}")" = true
+          jq '{id,tag_name,name,draft,prerelease,immutable,assets:[.assets[]|{id,name,size,browser_download_url}]}' <<<"${release_json}" > "${evidence_root}/release-assets.json"
+          cat "${evidence_root}/conformance/human-report.md" >> "${GITHUB_STEP_SUMMARY}"
+      - name: Upload immutable release evidence copy
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deterministic-proof-fetch-scheduler-release
+          path: ${{ runner.temp }}/deterministic-proof-fetch-scheduler-release
+          if-no-files-found: warn

@@ -1,0 +1,15 @@
+{
+  "schema": "gooo/deterministic-proof-fetch-scheduler/canonical-cases/v1",
+  "version": "v1",
+  "cases": [
+    {"id":"closed-canonical-order","kind":"success","http_status":200,"expected_coordinate":"fixture://case/001","observed_coordinate":"fixture://case/001","expected_digest":"sha256:case0001","observed_digest":"sha256:case0001"},
+    {"id":"closed-reuse","kind":"success","http_status":200,"expected_coordinate":"fixture://case/002","observed_coordinate":"fixture://case/002","expected_digest":"sha256:case0002","observed_digest":"sha256:case0002"},
+    {"id":"closed-replay","kind":"success","http_status":200,"expected_coordinate":"fixture://case/003","observed_coordinate":"fixture://case/003","expected_digest":"sha256:case0003","observed_digest":"sha256:case0003"},
+    {"id":"unknown-missing","kind":"missing","http_status":404,"expected_coordinate":"fixture://case/004","observed_coordinate":null,"expected_digest":"sha256:case0004","observed_digest":null},
+    {"id":"unknown-timeout","kind":"timeout","http_status":0,"expected_coordinate":"fixture://case/005","observed_coordinate":null,"expected_digest":"sha256:case0005","observed_digest":null},
+    {"id":"unknown-rate-limit","kind":"rate-limit","http_status":429,"expected_coordinate":"fixture://case/006","observed_coordinate":null,"expected_digest":"sha256:case0006","observed_digest":null},
+    {"id":"refuted-digest-mismatch","kind":"digest-mismatch","http_status":200,"expected_coordinate":"fixture://case/007","observed_coordinate":"fixture://case/007","expected_digest":"sha256:case0007","observed_digest":"sha256:wrong0007"},
+    {"id":"refuted-coordinate-contradiction","kind":"coordinate-contradiction","http_status":200,"expected_coordinate":"fixture://case/008","observed_coordinate":"fixture://other/008","expected_digest":"sha256:case0008","observed_digest":"sha256:case0008"},
+    {"id":"refuted-race-divergence","kind":"race-divergence","http_status":0,"expected_coordinate":"fixture://case/009","observed_coordinate":null,"expected_digest":"sha256:case0009","observed_digest":null,"race_field":"canonical_order","race_baseline":"lock-001,lock-002","race_candidate":"lock-002,lock-001"}
+  ]
+}

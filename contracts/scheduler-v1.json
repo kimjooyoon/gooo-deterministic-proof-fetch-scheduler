@@ -1,0 +1,21 @@
+{
+  "schema": "gooo/deterministic-proof-fetch-scheduler/v1",
+  "contract_id": "deterministic-proof-fetch-scheduler-v1",
+  "version": "v1",
+  "fixed_lock_count": 53,
+  "fixed_case_count": 9,
+  "required_outputs": [
+    "schedule.json",
+    "per-lock-evidence.ndjson",
+    "replay-receipt.json",
+    "exact-pair-comparison.json",
+    "generated-worker.go",
+    "canonical-cases.json",
+    "human-report.md"
+  ],
+  "state_precedence": ["REFUTED", "UNKNOWN", "CLOSED"],
+  "unknown_field_count": 6,
+  "go_version": "1.27",
+  "cross_project_required_gates": 0,
+  "immutable_release_required": true
+}
