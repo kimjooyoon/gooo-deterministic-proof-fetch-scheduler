@@ -37,9 +37,9 @@ type Authority struct {
 }
 
 type Guardrail struct {
-	ForbiddenLocalValidation []string `json:"forbidden_local_validation_commands"`
-	OperationalRefuted       bool     `json:"operational_refuted"`
-	FailureDeletesForbidden  bool     `json:"failure_deletes_forbidden"`
+	ForbiddenLocalValidation []string  `json:"forbidden_local_validation_commands"`
+	OperationalRefuted       bool      `json:"operational_refuted"`
+	FailureDeletesForbidden  bool      `json:"failure_deletes_forbidden"`
 	RuntimeAuthority         Authority `json:"runtime_authority"`
 }
 
@@ -59,23 +59,23 @@ type Lock struct {
 }
 
 type CaseDecl struct {
-	Ordinal int    `json:"ordinal"`
-	ID      string `json:"id"`
-	Kind    string `json:"kind"`
+	Ordinal  int    `json:"ordinal"`
+	ID       string `json:"id"`
+	Kind     string `json:"kind"`
 	Expected string `json:"expected"`
 }
 
 type Source struct {
-	Schema            string       `json:"schema"`
-	Version           string       `json:"version"`
-	Authority         Authority    `json:"authority"`
-	Guardrail         Guardrail    `json:"guardrail"`
-	ConcurrencyBound  int          `json:"concurrency_bound"`
-	Retry             RetryPolicy  `json:"retry_policy"`
-	CanonicalOrder    []string     `json:"canonical_order"`
-	Locks             []Lock       `json:"locks"`
-	Cases             []CaseDecl   `json:"cases"`
-	SourceDigest      string       `json:"source_digest"`
+	Schema           string      `json:"schema"`
+	Version          string      `json:"version"`
+	Authority        Authority   `json:"authority"`
+	Guardrail        Guardrail   `json:"guardrail"`
+	ConcurrencyBound int         `json:"concurrency_bound"`
+	Retry            RetryPolicy `json:"retry_policy"`
+	CanonicalOrder   []string    `json:"canonical_order"`
+	Locks            []Lock      `json:"locks"`
+	Cases            []CaseDecl  `json:"cases"`
+	SourceDigest     string      `json:"source_digest"`
 }
 
 type Contract struct {
@@ -93,11 +93,11 @@ type Contract struct {
 }
 
 type FixtureRecord struct {
-	LockID              string  `json:"lock_id"`
-	HTTPStatus          int     `json:"http_status"`
-	ObservedCoordinate  *string `json:"observed_coordinate"`
-	ObservedDigest      *string `json:"observed_digest"`
-	BodyMode            string  `json:"body_mode"`
+	LockID             string  `json:"lock_id"`
+	HTTPStatus         int     `json:"http_status"`
+	ObservedCoordinate *string `json:"observed_coordinate"`
+	ObservedDigest     *string `json:"observed_digest"`
+	BodyMode           string  `json:"body_mode"`
 }
 
 type Fixture struct {
@@ -121,10 +121,10 @@ type CaseFixture struct {
 }
 
 type CasesFixture struct {
-	Schema  string         `json:"schema"`
-	Version string         `json:"version"`
-	Cases   []CaseFixture  `json:"cases"`
-	Digest  string         `json:"cases_digest,omitempty"`
+	Schema  string        `json:"schema"`
+	Version string        `json:"version"`
+	Cases   []CaseFixture `json:"cases"`
+	Digest  string        `json:"cases_digest,omitempty"`
 }
 
 type Unknown struct {
@@ -148,34 +148,34 @@ type Counterexample struct {
 }
 
 type LockEvidence struct {
-	LockID          string         `json:"lock_id"`
-	Coordinate      string         `json:"coordinate"`
-	Status          string         `json:"status"`
-	Digest          *string        `json:"digest"`
-	Attempts        int            `json:"attempts"`
-	RequestCount    int            `json:"request_count"`
-	Reused          bool           `json:"reused"`
-	Unknown         *Unknown       `json:"unknown"`
-	Counterexample  *Counterexample `json:"counterexample"`
+	LockID         string          `json:"lock_id"`
+	Coordinate     string          `json:"coordinate"`
+	Status         string          `json:"status"`
+	Digest         *string         `json:"digest"`
+	Attempts       int             `json:"attempts"`
+	RequestCount   int             `json:"request_count"`
+	Reused         bool            `json:"reused"`
+	Unknown        *Unknown        `json:"unknown"`
+	Counterexample *Counterexample `json:"counterexample"`
 }
 
 type Metrics struct {
-	WallMS       int64 `json:"wall_ms"`
-	PeakRSSKib   int64 `json:"peak_rss_kib"`
-	Requests     int   `json:"requests"`
-	MaxInFlight  int   `json:"max_in_flight"`
-	Completed    int   `json:"completed"`
-	Reused       int   `json:"reused"`
-	Unknown      int   `json:"unknown"`
-	Refuted      int   `json:"refuted"`
+	WallMS      int64 `json:"wall_ms"`
+	PeakRSSKib  int64 `json:"peak_rss_kib"`
+	Requests    int   `json:"requests"`
+	MaxInFlight int   `json:"max_in_flight"`
+	Completed   int   `json:"completed"`
+	Reused      int   `json:"reused"`
+	Unknown     int   `json:"unknown"`
+	Refuted     int   `json:"refuted"`
 }
 
 type RunResult struct {
-	Mode          string         `json:"mode"`
-	Evidence      []LockEvidence `json:"evidence"`
-	Metrics       Metrics        `json:"metrics"`
-	SemanticRoot  string         `json:"semantic_root"`
-	Schedule      []ScheduleItem `json:"schedule"`
+	Mode         string         `json:"mode"`
+	Evidence     []LockEvidence `json:"evidence"`
+	Metrics      Metrics        `json:"metrics"`
+	SemanticRoot string         `json:"semantic_root"`
+	Schedule     []ScheduleItem `json:"schedule"`
 }
 
 type ScheduleItem struct {
@@ -186,18 +186,18 @@ type ScheduleItem struct {
 }
 
 type ScheduleReceipt struct {
-	Schema           string         `json:"schema"`
-	ContractID       string         `json:"contract_id"`
-	SourceDigest     string         `json:"source_digest"`
-	ContractDigest   string         `json:"contract_digest"`
-	FixtureDigest    string         `json:"fixture_digest"`
-	ConcurrencyBound int            `json:"concurrency_bound"`
-	RetryPolicy      RetryPolicy    `json:"retry_policy"`
-	CanonicalOrder   []string       `json:"canonical_order"`
+	Schema           string           `json:"schema"`
+	ContractID       string           `json:"contract_id"`
+	SourceDigest     string           `json:"source_digest"`
+	ContractDigest   string           `json:"contract_digest"`
+	FixtureDigest    string           `json:"fixture_digest"`
+	ConcurrencyBound int              `json:"concurrency_bound"`
+	RetryPolicy      RetryPolicy      `json:"retry_policy"`
+	CanonicalOrder   []string         `json:"canonical_order"`
 	DependencyEdges  []DependencyEdge `json:"dependency_edges"`
-	Baseline         Metrics        `json:"baseline"`
-	Candidate        Metrics        `json:"candidate"`
-	CandidateRoot    string         `json:"candidate_semantic_root"`
+	Baseline         Metrics          `json:"baseline"`
+	Candidate        Metrics          `json:"candidate"`
+	CandidateRoot    string           `json:"candidate_semantic_root"`
 }
 
 type DependencyEdge struct {
@@ -206,51 +206,52 @@ type DependencyEdge struct {
 }
 
 type PairComparison struct {
-	Schema                   string          `json:"schema"`
-	Baseline                 Metrics         `json:"baseline"`
-	Candidate                Metrics        `json:"candidate"`
-	BaselineFinalVerdict     string          `json:"baseline_final_verdict"`
-	CandidateFinalVerdict    string          `json:"candidate_final_verdict"`
-	Verdict                  string          `json:"verdict"`
-	Reason                   string          `json:"reason"`
-	PerLockStatusExact       bool            `json:"per_lock_status_exact"`
-	DigestExact              bool            `json:"digest_exact"`
-	UnknownFieldsExact       bool            `json:"unknown_fields_exact"`
-	CounterexamplesExact     bool            `json:"counterexamples_exact"`
-	FinalSemanticRootExact   bool            `json:"final_semantic_root_exact"`
-	AllCriticalFieldsExact   bool            `json:"all_critical_fields_exact"`
-	WallReductionActual      bool            `json:"wall_reduction_actual"`
-	BaselineSemanticRoot     string          `json:"baseline_semantic_root"`
-	CandidateSemanticRoot    string          `json:"candidate_semantic_root"`
-	Counterexample           *Counterexample `json:"counterexample"`
-	Unknown                  *Unknown        `json:"unknown"`
+	Schema                 string          `json:"schema"`
+	Baseline               Metrics         `json:"baseline"`
+	Candidate              Metrics         `json:"candidate"`
+	BaselineFinalVerdict   string          `json:"baseline_final_verdict"`
+	CandidateFinalVerdict  string          `json:"candidate_final_verdict"`
+	FinalVerdictExact      bool            `json:"final_verdict_exact"`
+	Verdict                string          `json:"verdict"`
+	Reason                 string          `json:"reason"`
+	PerLockStatusExact     bool            `json:"per_lock_status_exact"`
+	DigestExact            bool            `json:"digest_exact"`
+	UnknownFieldsExact     bool            `json:"unknown_fields_exact"`
+	CounterexamplesExact   bool            `json:"counterexamples_exact"`
+	FinalSemanticRootExact bool            `json:"final_semantic_root_exact"`
+	AllCriticalFieldsExact bool            `json:"all_critical_fields_exact"`
+	WallReductionActual    bool            `json:"wall_reduction_actual"`
+	BaselineSemanticRoot   string          `json:"baseline_semantic_root"`
+	CandidateSemanticRoot  string          `json:"candidate_semantic_root"`
+	Counterexample         *Counterexample `json:"counterexample"`
+	Unknown                *Unknown        `json:"unknown"`
 }
 
 type ReplayReceipt struct {
-	Schema                 string `json:"schema"`
-	ContractID             string `json:"contract_id"`
-	FirstSemanticRoot      string `json:"first_semantic_root"`
-	SecondSemanticRoot     string `json:"second_semantic_root"`
-	Deterministic          bool   `json:"deterministic"`
-	ReplayCount            int    `json:"replay_count"`
-	Decision               string `json:"decision"`
-	Reason                 string `json:"reason"`
+	Schema             string `json:"schema"`
+	ContractID         string `json:"contract_id"`
+	FirstSemanticRoot  string `json:"first_semantic_root"`
+	SecondSemanticRoot string `json:"second_semantic_root"`
+	Deterministic      bool   `json:"deterministic"`
+	ReplayCount        int    `json:"replay_count"`
+	Decision           string `json:"decision"`
+	Reason             string `json:"reason"`
 }
 
 type CaseResult struct {
-	Ordinal        int            `json:"ordinal"`
-	CaseID         string         `json:"case_id"`
-	Expected       string         `json:"expected"`
-	Decision       string         `json:"decision"`
-	Reason         string         `json:"reason"`
-	Unknown        *Unknown       `json:"unknown"`
+	Ordinal        int             `json:"ordinal"`
+	CaseID         string          `json:"case_id"`
+	Expected       string          `json:"expected"`
+	Decision       string          `json:"decision"`
+	Reason         string          `json:"reason"`
+	Unknown        *Unknown        `json:"unknown"`
 	Counterexample *Counterexample `json:"counterexample"`
 }
 
 type StageMetric struct {
-	Stage       string `json:"stage"`
-	WallMS      int64  `json:"wall_ms"`
-	PeakRSSKib  int64  `json:"peak_rss_kib"`
+	Stage      string `json:"stage"`
+	WallMS     int64  `json:"wall_ms"`
+	PeakRSSKib int64  `json:"peak_rss_kib"`
 }
 
 type TestMetrics struct {
@@ -263,15 +264,15 @@ type TestMetrics struct {
 }
 
 type Inventory struct {
-	GoFiles             int `json:"go_files"`
-	GoooFiles           int `json:"gooo_files"`
-	GoPhysicalLines     int `json:"go_physical_lines"`
-	GoooPhysicalLines   int `json:"gooo_physical_lines"`
-	Directories         int `json:"directories"`
-	Files               int `json:"files"`
-	GeneratedArtifacts  int `json:"generated_artifacts"`
-	GeneratedBytes      int64 `json:"generated_bytes"`
-	RootReadmeExcluded  bool `json:"root_readme_excluded"`
+	GoFiles            int   `json:"go_files"`
+	GoooFiles          int   `json:"gooo_files"`
+	GoPhysicalLines    int   `json:"go_physical_lines"`
+	GoooPhysicalLines  int   `json:"gooo_physical_lines"`
+	Directories        int   `json:"directories"`
+	Files              int   `json:"files"`
+	GeneratedArtifacts int   `json:"generated_artifacts"`
+	GeneratedBytes     int64 `json:"generated_bytes"`
+	RootReadmeExcluded bool  `json:"root_readme_excluded"`
 }
 
 type OutputDigest struct {
@@ -281,23 +282,23 @@ type OutputDigest struct {
 }
 
 type ConformanceReport struct {
-	Schema          string          `json:"schema"`
-	ContractID      string          `json:"contract_id"`
-	SourceDigest    string          `json:"source_digest"`
-	ContractDigest  string          `json:"contract_digest"`
-	FixtureDigest   string          `json:"fixture_digest"`
-	CasesFixtureDigest string       `json:"cases_fixture_digest"`
-	Cases           []CaseResult    `json:"cases"`
-	CaseDistribution map[string]int `json:"case_distribution"`
-	ExactPair       PairComparison  `json:"exact_pair"`
-	Stages          []StageMetric   `json:"stages"`
-	Tests           TestMetrics     `json:"tests"`
-	Inventory       Inventory       `json:"inventory"`
-	Outputs         []OutputDigest  `json:"outputs"`
-	Authority       Authority       `json:"authority"`
-	RuntimeAuthority Authority      `json:"runtime_authority"`
-	Decision        string          `json:"decision"`
-	Reason          string          `json:"reason"`
+	Schema             string         `json:"schema"`
+	ContractID         string         `json:"contract_id"`
+	SourceDigest       string         `json:"source_digest"`
+	ContractDigest     string         `json:"contract_digest"`
+	FixtureDigest      string         `json:"fixture_digest"`
+	CasesFixtureDigest string         `json:"cases_fixture_digest"`
+	Cases              []CaseResult   `json:"cases"`
+	CaseDistribution   map[string]int `json:"case_distribution"`
+	ExactPair          PairComparison `json:"exact_pair"`
+	Stages             []StageMetric  `json:"stages"`
+	Tests              TestMetrics    `json:"tests"`
+	Inventory          Inventory      `json:"inventory"`
+	Outputs            []OutputDigest `json:"outputs"`
+	Authority          Authority      `json:"authority"`
+	RuntimeAuthority   Authority      `json:"runtime_authority"`
+	Decision           string         `json:"decision"`
+	Reason             string         `json:"reason"`
 }
 
 func precedence(status string) int {

@@ -343,7 +343,9 @@ func summarizeMetrics(evidence []LockEvidence, elapsed time.Duration, maxInFligh
 		}
 		switch item.Status {
 		case StateClosed:
-			metrics.Completed++
+			if !item.Reused {
+				metrics.Completed++
+			}
 		case StateUnknown:
 			metrics.Unknown++
 		case StateRefuted:
@@ -356,8 +358,9 @@ func summarizeMetrics(evidence []LockEvidence, elapsed time.Duration, maxInFligh
 func ComparePair(baseline, candidate RunResult) PairComparison {
 	comparison := PairComparison{Schema: Schema, Baseline: baseline.Metrics, Candidate: candidate.Metrics, BaselineFinalVerdict: FinalVerdict(baseline.Evidence), CandidateFinalVerdict: FinalVerdict(candidate.Evidence), BaselineSemanticRoot: baseline.SemanticRoot, CandidateSemanticRoot: candidate.SemanticRoot}
 	comparison.PerLockStatusExact, comparison.DigestExact, comparison.UnknownFieldsExact, comparison.CounterexamplesExact = compareEvidence(baseline.Evidence, candidate.Evidence)
+	comparison.FinalVerdictExact = comparison.BaselineFinalVerdict == comparison.CandidateFinalVerdict
 	comparison.FinalSemanticRootExact = baseline.SemanticRoot == candidate.SemanticRoot
-	comparison.AllCriticalFieldsExact = comparison.PerLockStatusExact && comparison.DigestExact && comparison.UnknownFieldsExact && comparison.CounterexamplesExact && comparison.FinalSemanticRootExact
+	comparison.AllCriticalFieldsExact = comparison.PerLockStatusExact && comparison.DigestExact && comparison.UnknownFieldsExact && comparison.CounterexamplesExact && comparison.FinalVerdictExact && comparison.FinalSemanticRootExact
 	comparison.WallReductionActual = candidate.Metrics.WallMS < baseline.Metrics.WallMS
 	if !comparison.AllCriticalFieldsExact {
 		comparison.Verdict = StateRefuted

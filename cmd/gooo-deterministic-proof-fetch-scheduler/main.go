@@ -39,13 +39,13 @@ func usage() {
 }
 
 type commonFlags struct {
-	root          string
-	source        string
-	contract      string
-	fixture       string
-	casesFixture  string
-	outputDir     string
-	ciMetrics     string
+	root         string
+	source       string
+	contract     string
+	fixture      string
+	casesFixture string
+	outputDir    string
+	ciMetrics    string
 }
 
 func addCommonFlags(set *flag.FlagSet) *commonFlags {
@@ -80,12 +80,12 @@ func compile(args []string) error {
 		return err
 	}
 	semanticIR := struct {
-		Schema          string                    `json:"schema"`
-		SourceDigest    string                    `json:"source_digest"`
-		ContractDigest  string                    `json:"contract_digest"`
-		Concurrency    int                       `json:"concurrency_bound"`
-		CanonicalOrder []string                  `json:"canonical_order"`
-		Locks          []scheduler.Lock          `json:"locks"`
+		Schema         string           `json:"schema"`
+		SourceDigest   string           `json:"source_digest"`
+		ContractDigest string           `json:"contract_digest"`
+		Concurrency    int              `json:"concurrency_bound"`
+		CanonicalOrder []string         `json:"canonical_order"`
+		Locks          []scheduler.Lock `json:"locks"`
 	}{scheduler.Schema, source.SourceDigest, contractDigest, source.ConcurrencyBound, source.CanonicalOrder, source.Locks}
 	if err := writeJSON(filepath.Join(values.outputDir, "semantic-ir.json"), semanticIR); err != nil {
 		return err
