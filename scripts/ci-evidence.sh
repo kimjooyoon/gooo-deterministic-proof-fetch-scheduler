@@ -26,7 +26,7 @@ measure_stage test bash -c "go test -json ./... > '${evidence_dir}/go-test.json'
 
 measure_stage vet go vet ./...
 
-measure_stage format bash -c 'test -z "$(gofmt -d $(git ls-files "*.go"))"'
+measure_stage format bash -c "gofmt -d \$(git ls-files '*.go') > '${evidence_dir}/gofmt.diff'; test ! -s '${evidence_dir}/gofmt.diff'"
 
 measure_stage semantic-audit bash scripts/semantic-audit.sh
 
