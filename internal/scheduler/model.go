@@ -211,6 +211,7 @@ type PairComparison struct {
 	Candidate                Metrics        `json:"candidate"`
 	BaselineFinalVerdict     string          `json:"baseline_final_verdict"`
 	CandidateFinalVerdict    string          `json:"candidate_final_verdict"`
+	FinalVerdictExact        bool            `json:"final_verdict_exact"`
 	Verdict                  string          `json:"verdict"`
 	Reason                   string          `json:"reason"`
 	PerLockStatusExact       bool            `json:"per_lock_status_exact"`
