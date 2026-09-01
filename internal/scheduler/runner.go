@@ -343,7 +343,9 @@ func summarizeMetrics(evidence []LockEvidence, elapsed time.Duration, maxInFligh
 		}
 		switch item.Status {
 		case StateClosed:
-			metrics.Completed++
+			if !item.Reused {
+				metrics.Completed++
+			}
 		case StateUnknown:
 			metrics.Unknown++
 		case StateRefuted:
