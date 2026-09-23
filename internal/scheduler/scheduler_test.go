@@ -28,3 +28,9 @@ func TestPrecedence(t *testing.T) {
 		t.Fatalf("expected REFUTED precedence, got %s", got)
 	}
 }
+
+func TestSourceRejectsDuplicateFields(t *testing.T) {
+	if _, err := parseKeyValues([]string{"schema=first", "schema=second"}); err == nil {
+		t.Fatal("expected duplicate source fields to be rejected")
+	}
+}

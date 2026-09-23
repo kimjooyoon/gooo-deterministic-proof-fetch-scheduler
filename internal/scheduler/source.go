@@ -194,6 +194,9 @@ func parseKeyValues(fields []string) (map[string]string, error) {
 		if value == "" {
 			return nil, fmt.Errorf("empty value for %q", parts[0])
 		}
+		if _, exists := values[parts[0]]; exists {
+			return nil, fmt.Errorf("duplicate key %q", parts[0])
+		}
 		values[parts[0]] = value
 	}
 	return values, nil
