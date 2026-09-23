@@ -362,9 +362,19 @@ func validateSource(source Source, contract Contract) error {
 			return fmt.Errorf("incomplete lock declaration %q", lock.ID)
 		}
 	}
+	orderSeen := make(map[string]bool, len(source.CanonicalOrder))
 	for _, id := range source.CanonicalOrder {
 		if !seen[id] {
 			return fmt.Errorf("canonical order references undeclared lock %q", id)
+		}
+		if orderSeen[id] {
+			return fmt.Errorf("canonical order repeats lock %q", id)
+		}
+		orderSeen[id] = true
+	}
+	for id := range seen {
+		if !orderSeen[id] {
+			return fmt.Errorf("canonical order omits lock %q", id)
 		}
 	}
 	if source.Authority.RepositoryWrites != 0 || source.Authority.InputRepositoryWrites != 0 || source.Authority.LocalTestExecutions != 0 || source.Authority.CrossProjectRequiredGates != 0 || source.Authority.AutomaticCommit != 0 || source.Authority.AutomaticPush != 0 || source.Authority.AutomaticMerge != 0 || source.Authority.AutomaticTag != 0 || source.Authority.AutomaticRelease != 0 {
